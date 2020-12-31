@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
+import inboxReducer from "../features/inbox/inboxSlice";
 import spamReducer from "../features/spam/spamSlice";
 import deleteReducer from "../features/delete/deleteSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    inboxStore: inboxReducer,
     spamStore: spamReducer,
     deleteStore: deleteReducer,
   },

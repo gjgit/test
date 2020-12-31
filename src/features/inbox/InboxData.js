@@ -11,12 +11,10 @@ const InboxData = ({ data }) => {
       <div>
         <h3>{product.subject}</h3>
         <p dangerouslySetInnerHTML={{ __html: product.content }}></p>
-        <hr />
-        <h4>{product.unread}</h4>
       </div>
     );
   } else {
-    productData = <h2>Sorry. InboxData doesn't exist</h2>;
+    productData = <h2>Sorry. this message doesn't exist</h2>;
   }
 
   return <div>{productData}</div>;

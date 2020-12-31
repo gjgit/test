@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 export const spamSlice = createSlice({
   name: "spamStore",
@@ -23,7 +23,6 @@ export const spamSlice = createSlice({
           "You have just won the New York official lottery. Please send us your address so that we may start the transfer.",
       },
     ],
-    toogle: false,
   },
   reducers: {
     toggleTodo: (state, action) => {
@@ -44,29 +43,11 @@ export const spamSlice = createSlice({
         spam: state.spam.filter((todo) => todo.id !== action.payload),
       };
     },
-    fliter: (state, action) => {
-      return {
-        ...state.spam,
-        spam: state.spam.filter((t) => t.isflag),
-      };
-    },
-    Rfliter: (state, action) => {
-      return {
-        ...state.spamStore,
-        spam: state.spamStore,
-      };
-    },
   },
 });
 
-export const {
-  toggleTodo,
-  toggleFlag,
-  removeMail,
-  fliter,
-  Rfliter,
-} = spamSlice.actions;
+export const { toggleTodo, toggleFlag, removeMail } = spamSlice.actions;
 
-export const selectCount2 = (state) => state.spamStore.spam;
+export const GetSpamData = (state) => state.spamStore.spam;
 
 export default spamSlice.reducer;

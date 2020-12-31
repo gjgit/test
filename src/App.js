@@ -1,17 +1,24 @@
+import React from "react";
 import "./App.css";
-
+import { useSelector } from "react-redux";
 import { Link, Route, Switch, Redirect } from "react-router-dom";
-import Inbox from "./Inbox";
+import Inbox from "./features/inbox/Inbox";
 import Spam from "./features/spam/Spam";
 import Delete from "./features/delete/Delete";
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
+import { GetInbox } from "./features/inbox/inboxSlice";
+import { GetSpamData } from "./features/spam/spamSlice";
+import { getDeleteData } from "./features/delete/deleteSlice";
 
 function App() {
+  const InboxDatas = useSelector(GetInbox);
+  const SpamDatas = useSelector(GetSpamData);
+  const DeleteDatas = useSelector(getDeleteData);
+  const Inboxcount = InboxDatas.filter(({ unread }) => unread === true).length;
+  const Spamcount = SpamDatas.filter(({ unread }) => unread === true).length;
+  const DeleteCount = DeleteDatas.filter(({ unread }) => unread === true)
+    .length;
+
   return (
     <div className="App">
       <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
@@ -23,24 +30,33 @@ function App() {
             <div className="position-sticky pt-3">
               <ul className="nav flex-column">
                 <li className="nav-item">
-                  <a className="nav-link">
-                    <Link to="/inbox">Inbox</Link>
-                  </a>
+                  <span className="nav-link">
+                    <Link to="/inbox">Inbox </Link>{" "}
+                    <span className="badge  bg-secondary rounded-pill mt-auto text-white">
+                      {Inboxcount}
+                    </span>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">
-                    <Link to="/spam">Spam</Link>
-                  </a>
+                  <span className="nav-link">
+                    <Link to="/spam">Spam </Link>
+                    <span className="badge  bg-secondary rounded-pill mt-auto text-white">
+                      {Spamcount}
+                    </span>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">
-                    <Link to="/delete">Deleted Items</Link>
-                  </a>
+                  <span className="nav-link">
+                    <Link to="/delete">Deleted Items </Link>
+                    <span className="badge  bg-secondary rounded-pill mt-auto text-white">
+                      {DeleteCount}
+                    </span>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">
+                  <span className="nav-link">
                     <Link to="/admin">New Folder</Link>
-                  </a>
+                  </span>
                 </li>
               </ul>
             </div>

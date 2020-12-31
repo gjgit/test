@@ -1,6 +1,4 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
-
-import { selectCount2 } from "../spam/spamSlice";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const deleteSlice = createSlice({
   name: "deleteStore",
@@ -9,14 +7,18 @@ export const deleteSlice = createSlice({
   },
   reducers: {
     toggleDeleteTodo: (state, action) => {
-      alert(2323);
+      state.delete.push(action.payload);
     },
   },
 });
 
-// export const { toggleTodo } = deleteSlice.actions;
+export const {
+  toggleTodo,
+  toggleFlag,
+  removeMail,
+  toggleDeleteTodo,
+} = deleteSlice.actions;
 
-// export const selectCount2 = (state) => state.deleteStore.delete;
-export const selectCount22 = (state) => state.spamStore.spam;
+export const getDeleteData = (state) => state.deleteStore.delete;
 
 export default deleteSlice.reducer;

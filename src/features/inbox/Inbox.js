@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Route, useRouteMatch } from "react-router-dom";
-import InboxData from "./SpamData";
-import { GetSpamData, toggleTodo, toggleFlag, removeMail } from "./spamSlice";
+import InboxData from "./InboxData";
+import { GetInbox, toggleTodo, toggleFlag, removeMail } from "./inboxSlice";
 import { toggleDeleteTodo } from "../delete/deleteSlice";
 
-const Spam = () => {
-  const count = useSelector(GetSpamData);
-  const dispatch = useDispatch();
+const Inbox = () => {
+  const InboxDatas = useSelector(GetInbox);
+  const Dispatch = useDispatch();
   const { url } = useRouteMatch();
   const [filter, setFilter] = useState();
 
   const filteredProjects = !filter
-    ? count
-    : count.filter((project) => project[filter]);
+    ? InboxDatas
+    : InboxDatas.filter((project) => project[filter]);
 
   const linkList = filteredProjects.map((product) => {
     return (
@@ -21,7 +21,7 @@ const Spam = () => {
         <a
           key={product.id}
           className="list-group-item list-group-item-action"
-          onClick={() => dispatch(toggleTodo(product.id))}
+          onClick={() => Dispatch(toggleTodo(product.id))}
           style={{
             fontWeight: product.unread ? "700" : "400",
           }}
@@ -35,7 +35,7 @@ const Spam = () => {
             >
               <a
                 className="nav-link p-0 px-1"
-                onClick={() => dispatch(toggleFlag(product.id))}
+                onClick={() => Dispatch(toggleFlag(product.id))}
                 style={{
                   color: product.isflag ? "#f30" : "#007bff",
                 }}
@@ -56,8 +56,8 @@ const Spam = () => {
               <a
                 className="nav-link p-0 px-1"
                 onClick={() => {
-                  dispatch(removeMail(product.id));
-                  dispatch(toggleDeleteTodo(product));
+                  Dispatch(removeMail(product.id));
+                  Dispatch(toggleDeleteTodo(product));
                 }}
               >
                 <svg
@@ -77,7 +77,7 @@ const Spam = () => {
               </a>
             </div>
           </div>
-          <p className="mb-1  text-truncate">
+          <p className="mb-1 text-truncate">
             {product.isflag}
             <span dangerouslySetInnerHTML={{ __html: product.content }}></span>
           </p>
@@ -121,7 +121,7 @@ const Spam = () => {
         {linkList.length ? (
           <div className="col-md-8 ms-sm-auto col-lg-8 mt-4">
             <Route path={`${url}/:productId`}>
-              <InboxData data={count} />
+              <InboxData data={InboxDatas} />
             </Route>
             <Route exact path={url}>
               <div className="col-md-8 col-lg-8">
@@ -147,4 +147,4 @@ const Spam = () => {
   );
 };
 
-export default Spam;
+export default Inbox;

@@ -11,7 +11,6 @@ const SpamData = ({ data }) => {
       <div>
         <h3>{product.subject}</h3>
         <p dangerouslySetInnerHTML={{ __html: product.content }}></p>
-        <p dangerouslySetInnerHTML={{ __html: product.unread }}></p>
       </div>
     );
   } else {
