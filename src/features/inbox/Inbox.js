@@ -10,11 +10,11 @@ const Inbox = () => {
   const Dispatch = useDispatch();
   const { url } = useRouteMatch();
   const [filter, setFilter] = useState();
-
+  // flitering based on project types
   const filteredProjects = !filter
     ? InboxDatas
     : InboxDatas.filter((project) => project[filter]);
-
+  // map those fliter items
   const linkList = filteredProjects.map((product) => {
     return (
       <Link
@@ -103,6 +103,7 @@ const Inbox = () => {
               role="group"
               aria-label="First group"
             >
+              {/* filter based on values */}
               <button
                 type="button"
                 className={`btn btn-outline-secondary border-0 outline btn-sm ${
@@ -123,10 +124,12 @@ const Inbox = () => {
               </button>
             </div>
           </div>
+          {/* get values from splice method and pass it to the list */}
           <div className="list-group sidebar2">{linkList}</div>
         </div>
         {linkList.length ? (
           <div className="col-md-8 ms-sm-auto col-lg-8 mt-4">
+            {/* nested routes start */}
             <Route path={`${url}/:productId`}>
               <InboxData data={InboxDatas} />
             </Route>
@@ -139,8 +142,10 @@ const Inbox = () => {
                 </div>
               </div>
             </Route>
+            {/* nested route ended */}
           </div>
         ) : (
+          // null itmes found
           <div className="col-md-8 ms-sm-auto col-lg-8 mt-4">
             <div className="card border-0">
               <div className="card-body text-center">

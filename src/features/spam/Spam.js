@@ -10,11 +10,11 @@ const Spam = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
   const [filter, setFilter] = useState();
-
+  // flitering based on project types
   const filteredDatas = !filter
     ? count
     : count.filter((project) => project[filter]);
-
+  // map those fliter items
   const linkList = filteredDatas.map((product) => {
     return (
       <Link
@@ -98,6 +98,7 @@ const Spam = () => {
             role="toolbar"
             aria-label="Toolbar with button groups"
           >
+            {/* filter based on values */}
             <div
               className="btn-group me-2 ml-auto m-2"
               role="group"
@@ -125,8 +126,10 @@ const Spam = () => {
           </div>
           <div className="list-group sidebar2">{linkList}</div>
         </div>
+        {/* get values from splice method and pass it to the list */}
         {linkList.length ? (
           <div className="col-md-8 ms-sm-auto col-lg-8 mt-4">
+            {/* nested routes start */}
             <Route path={`${url}/:productId`}>
               <InboxData data={count} />
             </Route>
@@ -139,8 +142,10 @@ const Spam = () => {
                 </div>
               </div>
             </Route>
+            {/* nested route ended */}
           </div>
         ) : (
+          // null itmes found
           <div className="col-md-8 ms-sm-auto col-lg-8 mt-4">
             <div className="card border-0">
               <div className="card-body text-center">

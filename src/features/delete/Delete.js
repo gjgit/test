@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getDeleteData } from "./deleteSlice";
 
 const Inbox = () => {
+  // get values from the selector
   const count = useSelector(getDeleteData);
 
   return (

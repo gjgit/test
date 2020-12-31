@@ -3,6 +3,7 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 export const inboxSlice = createSlice({
   name: "inboxStore",
   initialState: {
+    // intial state for inbox
     inbox: [
       {
         id: 1,
@@ -22,6 +23,7 @@ export const inboxSlice = createSlice({
       },
     ],
   },
+  // get the payload value and make actions
   reducers: {
     toggleTodo: (state, action) => {
       const todo = state.inbox.find((todo) => todo.id === action.payload);
@@ -35,16 +37,12 @@ export const inboxSlice = createSlice({
         todo.isflag = !todo.isflag;
       }
     },
+
     removeMail: (state, action) => {
       return {
         ...state.inbox,
         inbox: state.inbox.filter((todo) => todo.id !== action.payload),
       };
-    },
-    getInboxUnreadCount: (state, action) => {
-      const count = state.inbox.filter((t) => t.unread);
-      const hiiii = 2;
-      return hiiii;
     },
   },
 });
@@ -55,7 +53,8 @@ export const {
   removeMail,
   getInboxUnreadCount,
 } = inboxSlice.actions;
-
+// The function below is called a selector and allows us to select a value from
+// the state.
 export const GetInbox = (state) => state.inboxStore.inbox;
 
 export default inboxSlice.reducer;

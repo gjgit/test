@@ -11,13 +11,13 @@ import { GetSpamData } from "./features/spam/spamSlice";
 import { getDeleteData } from "./features/delete/deleteSlice";
 
 function App() {
+  // calculate unread counts ( get values from reducer and then count it.)
   const InboxDatas = useSelector(GetInbox);
   const SpamDatas = useSelector(GetSpamData);
   const DeleteDatas = useSelector(getDeleteData);
   const Inboxcount = InboxDatas.filter(({ unread }) => unread === true).length;
   const Spamcount = SpamDatas.filter(({ unread }) => unread === true).length;
-  const DeleteCount = DeleteDatas.filter(({ unread }) => unread === true)
-    .length;
+  const DeleteCount = DeleteDatas.filter(({ id }) => id).length;
 
   return (
     <div className="App">
@@ -62,6 +62,7 @@ function App() {
             </div>
           </nav>
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-0">
+            {/* start router */}
             <Switch>
               <Redirect exact from="/" to="inbox" />
               <Route path="/inbox">
@@ -74,6 +75,7 @@ function App() {
                 <Delete />
               </Route>
             </Switch>
+            {/* end router */}
           </main>
         </div>
       </div>

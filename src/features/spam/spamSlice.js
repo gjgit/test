@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const spamSlice = createSlice({
   name: "spamStore",
   initialState: {
+    // intial state for spam
     spam: [
       {
         id: 1,
@@ -23,7 +24,7 @@ export const spamSlice = createSlice({
           "You have just won the New York official lottery. Please send us your address so that we may start the transfer.",
       },
     ],
-  },
+  }, // get the payload value and make actions
   reducers: {
     toggleTodo: (state, action) => {
       const todo = state.spam.find((todo) => todo.id === action.payload);
@@ -47,7 +48,8 @@ export const spamSlice = createSlice({
 });
 
 export const { toggleTodo, toggleFlag, removeMail } = spamSlice.actions;
-
+// The function below is called a selector and allows us to select a value from
+// the state.
 export const GetSpamData = (state) => state.spamStore.spam;
 
 export default spamSlice.reducer;
