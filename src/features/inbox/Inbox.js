@@ -17,9 +17,12 @@ const Inbox = () => {
 
   const linkList = filteredProjects.map((product) => {
     return (
-      <Link to={`${url}/${product.id}`} className="text-decoration-none">
+      <Link
+        to={`${url}/${product.id}`}
+        className="text-decoration-none"
+        key={product.id}
+      >
         <a
-          key={product.id}
           className="list-group-item list-group-item-action"
           onClick={() => Dispatch(toggleTodo(product.id))}
           style={{
@@ -102,14 +105,18 @@ const Inbox = () => {
             >
               <button
                 type="button"
-                className="btn btn-outline-secondary border-0 outline btn-sm"
+                className={`btn btn-outline-secondary border-0 outline btn-sm ${
+                  filter ? "none" : "active"
+                }`}
                 onClick={() => setFilter()}
               >
                 All
               </button>
               <button
                 type="button"
-                className="btn btn-outline-secondary border-0 outline btn-sm"
+                className={`btn btn-outline-secondary border-0 outline btn-sm ${
+                  filter ? "active" : "none"
+                }`}
                 onClick={() => setFilter("isflag")}
               >
                 Flagged

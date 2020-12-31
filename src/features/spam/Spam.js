@@ -11,15 +11,18 @@ const Spam = () => {
   const { url } = useRouteMatch();
   const [filter, setFilter] = useState();
 
-  const filteredProjects = !filter
+  const filteredDatas = !filter
     ? count
     : count.filter((project) => project[filter]);
 
-  const linkList = filteredProjects.map((product) => {
+  const linkList = filteredDatas.map((product) => {
     return (
-      <Link to={`${url}/${product.id}`} className="text-decoration-none">
-        <a
-          key={product.id}
+      <Link
+        to={`${url}/${product.id}`}
+        className="text-decoration-none"
+        key={product.id}
+      >
+        <span
           className="list-group-item list-group-item-action"
           onClick={() => dispatch(toggleTodo(product.id))}
           style={{
@@ -81,7 +84,7 @@ const Spam = () => {
             {product.isflag}
             <span dangerouslySetInnerHTML={{ __html: product.content }}></span>
           </p>
-        </a>
+        </span>
       </Link>
     );
   });
@@ -102,14 +105,18 @@ const Spam = () => {
             >
               <button
                 type="button"
-                className="btn btn-outline-secondary border-0 outline btn-sm"
+                className={`btn btn-outline-secondary border-0 outline btn-sm ${
+                  filter ? "none" : "active"
+                }`}
                 onClick={() => setFilter()}
               >
                 All
               </button>
               <button
                 type="button"
-                className="btn btn-outline-secondary border-0 outline btn-sm"
+                className={`btn btn-outline-secondary border-0 outline btn-sm ${
+                  filter ? "active" : "none"
+                }`}
                 onClick={() => setFilter("isflag")}
               >
                 Flagged

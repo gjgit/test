@@ -8,7 +8,7 @@ const InboxData = ({ data }) => {
 
   if (product) {
     productData = (
-      <div>
+      <div key={product.mId}>
         <h3>{product.subject}</h3>
         <p dangerouslySetInnerHTML={{ __html: product.content }}></p>
       </div>

@@ -55,7 +55,7 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <span className="nav-link">
-                    <Link to="/admin">New Folder</Link>
+                    <Link to="/admin">Custom Folder</Link>
                   </span>
                 </li>
               </ul>
