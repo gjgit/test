@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Route, useRouteMatch } from "react-router-dom";
 import InboxData from "./InboxData";
-import { GetInbox, toggleTodo, toggleFlag, removeMail } from "./inboxSlice";
+import {
+  GetInbox,
+  toggleTodo,
+  toggleFlag,
+  removeMail,
+  deltethunk,
+} from "./inboxSlice";
 import { toggleDeleteTodo } from "../delete/deleteSlice";
 
 const Inbox = () => {
@@ -58,10 +64,7 @@ const Inbox = () => {
               </a>
               <a
                 className="nav-link p-0 px-1"
-                onClick={() => {
-                  Dispatch(removeMail(product.id));
-                  Dispatch(toggleDeleteTodo(product));
-                }}
+                onClick={() => Dispatch(deltethunk(product))}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

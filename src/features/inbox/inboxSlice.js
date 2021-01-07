@@ -1,5 +1,7 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
+import { toggleDeleteTodo } from "../delete/deleteSlice";
+
 export const inboxSlice = createSlice({
   name: "inboxStore",
   initialState: {
@@ -53,6 +55,12 @@ export const {
   removeMail,
   getInboxUnreadCount,
 } = inboxSlice.actions;
+
+export const deltethunk = (product) => (dispatch, getState) => {
+  dispatch(removeMail(product.id));
+  dispatch(toggleDeleteTodo(product));
+};
+
 // The function below is called a selector and allows us to select a value from
 // the state.
 export const GetInbox = (state) => state.inboxStore.inbox;
